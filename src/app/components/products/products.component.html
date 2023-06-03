@@ -1,0 +1,41 @@
+<div class="row d-flex justify-content-evenly">
+  <div class="col-sm-12 mb-3">
+    <label for="sel1" class="form-label">Select Catgory Name:</label>
+    <select class="form-select col-sm-4" id="sel1"  name="sellist1" [(ngModel)]="filterID" >
+      <option *ngFor="let cate of categories" [ngValue]="cate.id">{{cate.Name}}</option>
+
+    </select>
+   </div>
+  <!-- <div class="col-sm-4 "*ngFor="let products of producstList" [class.bg-warning]="(products.quantity==1)"> -->
+    <div class="col-sm-3 m-4 p-4 border1" *ngFor="let products of filterList" [class.bg-warning]="(products.quantity==1)" appProductCard="35px">
+    <img [src]="products.prdImgURL"  class=" img-fluid border1"  alt="" >
+    <h4>{{products.name}}</h4>
+    <h4> price : {{products.price|currency }}</h4>
+    <h6> Quantity : {{products.quantity}}</h6>
+
+    <ng-container [ngSwitch]="products.quantity">
+      <ng-container *ngSwitchCase="1">
+        <p>only one in Stock</p>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <p>only Two Stock</p>
+      </ng-container>
+    </ng-container>
+<!-- template reference =>#name -->
+    <ng-container *ngIf="products.quantity>0 ;else outOfStockElem"><p>in stock </p></ng-container>
+      <ng-template #outOfStockElem><p>out of Stock </p> </ng-template>
+
+<h4>{{creditCardNumber | creditCard}}</h4>
+    <button type="button" class="btn btn-primary btn-sm me-3"[disabled]="products.quantity==0" (click)="decreaseQuantityFunc(products)"> Add product</button>
+   <!-- day 4 -->
+    <button class="btn btn-danger"  (click)="prdDetails(products.id)" >details</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+

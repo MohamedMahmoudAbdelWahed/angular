@@ -1,0 +1,39 @@
+<!-- task 1 day 3 -->
+
+  <div class="row">
+    <div class="col-6 mb-3">
+      <label class="col-md-2 control-label">  Filter by Price :   </label>
+      <input type="text" class="form-control" placeholder="Enter Price" [(ngModel)]="FilterPrice">
+      </div>
+      <p> Filtering value filter by Price : {{FilterPrice}}</p>
+  </div>
+
+
+<app-products [filterInChild]="FilterPrice"(newProdjctEvent)="addCart($event)"></app-products>
+
+
+
+<table class="table table-striped"[hidden]="conuterShow==0">
+  <thead >
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">price</th>
+      <th scope="col">quantity</th>
+      <th scope="col">total price</th>
+      <th scope="col"> Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product1 of prds">
+      <td>{{product1.name}}</td>
+      <td>{{product1.price}}</td>
+      <td>{{product1.quantity}}</td>
+      <td>{{product1.price*product1.quantity}}</td>
+      <td>
+      <button class="btn btn-danger" (click)="removeProduct(product1)">Delete</button>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>

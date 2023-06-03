@@ -1,0 +1,36 @@
+<div class="container mt-4 mb-3">
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <!-- ? => if value is null or undefined -->
+      <img [src] ="product?.prdImgURL" class="img-fluid">
+    </div>
+    <!-- *ngIf="product" (Another way)=> if value is null or undefined -->
+    <div class="col-sm-6" *ngIf="product">
+      <h1>{{product.name}}</h1>
+      <h3>Details Of Product</h3>
+      <p> {{product.details}}</p>
+      <h4>Price :  {{product.price | currency}}</h4>
+      <p> quantity : {{product.quantity}}</p>
+
+      <ng-container [ngSwitch]="product.quantity">
+        <ng-container *ngSwitchCase="0">
+         <p> out of Stock</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="1">
+          <p>only one in Stock</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <p>only Two Stock</p>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <p>In Stock</p>
+        </ng-container>
+      </ng-container>
+      <button class="btn btn-outline-dark" (click)="prevFunc()" [disabled]="product.id==prodectIdArray[0]" ><i class="fa-solid fa-backward"></i></button>
+      <button class="btn btn-outline-dark ms-2" (click)="nextFunc()" [disabled]="product.id==prodectIdArray[prodectIdArray.length-1]" ><i class="fa-solid fa-forward"></i></button>
+    </div>
+
+  </div>
+
+  <button class="btn btn-danger"  (click)="GoBack()" >Go Back</button>
+</div>
